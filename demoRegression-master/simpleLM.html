@@ -197,7 +197,6 @@ summary {
 
 <div id="TOC">
 <ul>
-<li><a href="#make-a-simple-regression-model">make a simple regression model</a></li>
 <li><a href="#neck">NECK</a>
 <ul>
 <li><a href="#model-length-neck-this-is-an-example">Model LENGTH ~ NECK this is an example</a></li>
@@ -217,16 +216,13 @@ summary {
 <li><a href="#chest">CHEST</a>
 <ul>
 <li><a href="#model-length-chest">Model LENGTH ~ CHEST</a></li>
-<li><a href="#now-predict-the-length-of-a-bear-who-has-a-neck-of-17-22-and-26">now predict the length of a bear who has a neck of 17, 22 and 26</a></li>
-<li><a href="#surely-there-is-another-variable-that-can-better-predict-length-than-neck.-find-one-and-compare-its-performance-to-that-of-neck-by-it-value-of-adjusted-rsquared-bigger-is-better.">Surely there is another variable that can better predict LENGTH than NECK. Find one and compare its performance to that of neck by it value of Adjusted-Rsquared (bigger is better).</a></li>
+<li><a href="#conclusion">CONCLUSION</a></li>
 </ul></li>
 </ul>
 </div>
 
-<div id="make-a-simple-regression-model" class="section level2">
-<h2>make a simple regression model</h2>
+<p>Set up regression models</p>
 <pre class="r"><code>bears &lt;- read.csv(file=&quot;BEARS.csv&quot;,header = TRUE)</code></pre>
-</div>
 <div id="neck" class="section level1">
 <h1>NECK</h1>
 <div id="model-length-neck-this-is-an-example" class="section level2">
@@ -343,16 +339,16 @@ abline(simphl)</code></pre>
 ## Residual standard error: 4.235 on 52 degrees of freedom
 ## Multiple R-squared:  0.8463, Adjusted R-squared:  0.8434 
 ## F-statistic: 286.3 on 1 and 52 DF,  p-value: &lt; 2.2e-16</code></pre>
-<pre class="r"><code>new &lt;- data.frame(HEADLEN=bears$HEADLEN [c(11,16.5,15.5)])
+<pre class="r"><code>new &lt;- data.frame(HEADLEN=bears$HEADLEN [c(5,15,23)])
 
 predict(simphl,new,se.fit=TRUE)</code></pre>
 <pre><code>## $fit
 ##        1        2        3 
-## 72.60367 58.82924 51.94202 
+## 70.30793 51.94202 58.82924 
 ## 
 ## $se.fit
 ##         1         2         3 
-## 1.0076661 0.5764793 0.6983951 
+## 0.8997321 0.6983951 0.5764793 
 ## 
 ## $df
 ## [1] 52
@@ -433,9 +429,6 @@ abline(simpct)</code></pre>
 ## Residual standard error: 4.939 on 52 degrees of freedom
 ## Multiple R-squared:  0.791,  Adjusted R-squared:  0.7869 
 ## F-statistic: 196.7 on 1 and 52 DF,  p-value: &lt; 2.2e-16</code></pre>
-</div>
-<div id="now-predict-the-length-of-a-bear-who-has-a-neck-of-17-22-and-26" class="section level2">
-<h2>now predict the length of a bear who has a neck of 17, 22 and 26</h2>
 <pre class="r"><code>new &lt;- data.frame(CHEST=bears$CHEST[c(26,45,54)])
 
 predict(simpct,new,se.fit=TRUE)</code></pre>
@@ -453,8 +446,13 @@ predict(simpct,new,se.fit=TRUE)</code></pre>
 ## $residual.scale
 ## [1] 4.939419</code></pre>
 </div>
-<div id="surely-there-is-another-variable-that-can-better-predict-length-than-neck.-find-one-and-compare-its-performance-to-that-of-neck-by-it-value-of-adjusted-rsquared-bigger-is-better." class="section level2">
-<h2>Surely there is another variable that can better predict LENGTH than NECK. Find one and compare its performance to that of neck by it value of Adjusted-Rsquared (bigger is better).</h2>
+<div id="conclusion" class="section level2">
+<h2>CONCLUSION</h2>
+<p>The best model was based on HEADLEN as seen by adjusted R-squared, the prediction of the length for the bears is 5,15, and 23 is<br />
+70.31, 51.94, 58.83.</p>
+<p>The actual length of the bears was<br />
+62, 52, 54.</p>
+<p>The error in prediction for bear number 5 is about 8 inches, for bear number 15 the prediction is right, and for bear number 23 the prediction was just under 6 inches.</p>
 </div>
 </div>
 
